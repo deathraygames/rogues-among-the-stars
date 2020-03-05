@@ -1,0 +1,26 @@
+{
+  "name": "rogues-among-the-stars",
+  "version": "0.0.1",
+  "description": "R.A.T.S. for 7DRL 2020",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deathraygames/rogues-among-the-stars.git"
+  },
+  "keywords": [
+    "roguelike",
+    "7drl"
+  ],
+  "author": "Luke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deathraygames/rogues-among-the-stars/issues"
+  },
+  "homepage": "https://github.com/deathraygames/rogues-among-the-stars#readme",
+  "dependencies": {
+    "roguelike-fonts": "github:rocket-boots/roguelike-fonts"
+  }
+}
