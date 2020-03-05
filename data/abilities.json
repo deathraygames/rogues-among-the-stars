@@ -1,0 +1,156 @@
+{
+	"abilities": {
+		"lunge": {
+			"name": "Lunge",
+			"description": "Lunge at your opponent for extra damage.",
+			"readyCost": { "ap": 1 },
+			"activateOn": "damage",
+			"effects": [
+				"damage"
+			]
+		},
+		"spin": {
+			"name": "Spin",
+			"description": "Spin around your opponent, switching positions.",
+			"readyCost": { "bp": 1 },
+			"activateOn": "attack",
+			"effects": [
+				"moveSwitch"
+			]
+		},
+		"feint": {
+			"name": "Feint",
+			"description": "Attack that does no damage but charges your AP.",
+			"readyCost": { "ap": 1 },
+			"activateOn": "attack",
+			"effects": [
+				"ap",
+				"apDamage",
+				"cancelDamage"
+			]
+		},
+		"push": {
+			"name": "Push",
+			"description": "Knock back your opponent with your next attack.",
+			"readyCost": { "ep": 1 },
+			"activateOn": "attack",
+			"effects": [
+				"push"
+			]
+		},
+		"reprise": {
+			"name": "Reprise",
+			"description": "Gain balance on your next attack.",
+			"readyCost": { "ap": 1 },
+			"activateOn": "attack",
+			"effects": [
+				"bp"
+			]
+		},
+		"insistence": {
+			"name": "Insistence",
+			"description": "Charge up your endurance on your next attack, but do no damage.",
+			"readyCost": { "ep": 1 },
+			"activateOn": "attack",
+			"effects": [
+				"ep",
+				"ep",
+				"cancelDamage"
+			]
+		},
+		"sweep": {
+			"name": "Sweep",
+			"description": "Knock back enemies with your brawn.",
+			"readyCost": { "ep": 1 },
+			"activateOn": "attack",
+			"effects": [
+				"pushAoe",
+				"cancelDamage"
+			]
+		},
+		"berserk": {
+			"name": "Berserk",
+			"description": "Your lust for blood heals you.",
+			"readyCost": { "ap": 1 },
+			"activateOn": "attack",
+			"effects": [
+				"hp"
+			]
+		},
+
+
+		"parry": {
+			"name": "Parry",
+			"description": "Block an incoming attack with your weapon.",
+			"readyCost": { "ap": 1 },
+			"activateOn": "attacked",
+			"effects": [
+				"cancelAttack"
+			]
+		},
+		"dodge": {
+			"name": "Dodge",
+			"description": "Avoid the next incoming attack with your agility.",
+			"readyCost": { "bp": 1 },
+			"activateOn": "attacked",
+			"effects": [
+				"cancelAttack"
+			]
+		},
+		"endure": {
+			"name": "Endure",
+			"description": "Absorb damage from the next attack that damages you.",
+			"readyCost": { "ep": 1 },
+			"activateOn": "damaged",
+			"effects": [
+				"cancelDamage"
+			]
+		},
+		"retreat": {
+			"name": "Retreat",
+			"description": "Avoid the next attack by moving backwards away from your opponent.",
+			"readyCost": { "bp": 1 },
+			"activateOn": "attacked",
+			"effects": [
+				"cancelDamage",
+				"moveBack"
+			]
+		},
+		"counterstrike": {
+			"name": "CounterStrike",
+			"description": "Automatically attack back when attacked.",
+			"readyCost": { "ap": 1 },
+			"activateOn": "attacked",
+			"effects": [
+				"attack"
+			]
+		},
+		"shove": {
+			"name": "CounterShove",
+			"description": "When attacked, shove your opponent back.",
+			"readyCost": { "ep": 1 },
+			"activateOn": "attacked",
+			"effects": [
+				"push"
+			]
+		},
+		"rage": {
+			"name": "Rage",
+			"description": "Getting hit makes you mad! You gain AP when damaged.",
+			"readyCost": { "ep": 1 },
+			"activateOn": "damaged",
+			"effects": [
+				"ap"
+			]
+		},
+		"swift": {
+			"name": "Swift",
+			"description": "Go first on the next turn.",
+			"readyCost": { "bp": 1 },
+			"activateOn": "round",
+			"effects": [
+				"initiative"
+			]
+		}
+	}
+}
