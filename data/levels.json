@@ -5,7 +5,10 @@
 			"description": "This floor acts as the barracks for dwarven miners and engineers",
 			"color": "#788",
 			"background": "#233",
-			"map": { "type": "digger", "walls": true },
+			"map": {
+				"type": "starship",
+				"wallsCharacter": "▧"
+			},
 			"props": [
 				{ "type": "stairsDown",	"quantity": 1 },
 				{ "type": "pedestal", "quantity": 1	},
@@ -31,7 +34,10 @@
 			"description": "Long abandoned tunnels once used to mine precious ore",
 			"color": "#616666",
 			"background": "#262222",
-			"map": { "type": "digger", "walls": true },
+			"map": {
+				"type": "starship",
+				"wallsCharacter": "▧"
+			},
 			"props": [
 				{ "type": "stairsUp", "quantity": 1	},
 				{ "type": "stairsDown",	"quantity": 1 },
@@ -65,7 +71,10 @@
 			"color": "#876",
 			"background": "#321",
 			"description": "This mysterious floor is not on any maps, and seems to be newly created. It contains a lot of new high-tech machinery.",
-			"map": { "type": "digger", "walls": true },
+			"map": {
+				"type": "starship",
+				"wallsCharacter": "#"
+			},
 			"props": [
 				{ "type": "stairsUp", "quantity": 1	},
 				{ "type": "stairsDown",	"quantity": 1 },
@@ -92,7 +101,10 @@
 			"color": "#746",
 			"background": "#201",
 			"description": "This dark floor smells of death.",
-			"map": { "type": "digger", "walls": true },
+			"map": {
+				"type": "starship",
+				"wallsCharacter": "▧"
+			},
 			"stairsUp": 1,
 			"props": [
 				{ "type": "stairsUp", "quantity": 1	},

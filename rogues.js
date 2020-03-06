@@ -1,7 +1,12 @@
+import StarshipGenerator from './node_modules/starship-the-next-generation/src/StarshipGenerator.js';
 
-var g = new rote.Game({
+const generator = new StarshipGenerator();
+
+const g = new rote.Game({
 	id: 'display',
 	keyboard: 'multi-move',
+	fontFamilies: ['Fix15MonoBold'],
+	haveSplash: true,
 	data: {
 		monsters: 'data/monsters.json',
 		items: 'data/items.json',
@@ -11,10 +16,21 @@ var g = new rote.Game({
 		playlist: 'data/playlist.json',
 		dungeon: 'data/dungeon.json',
 	},
+	generators: {
+		starship: generateStarshipMap
+	},
 	customEffects: {
 		gameOver: gameOver,
 	}
 });
+if (window) { window.g = g; }
+
+const displayOptions = {
+	width: 60,
+	height: 30,
+	fontSize: 20,
+	fontFamily: "Fix15MonoBold" // alternatives: "AppleII" or "White Rabbit"
+};
 
 function gameOver() {
 	g.print(`
@@ -25,6 +41,19 @@ function gameOver() {
 		'plot'
 	);
 	g.print('GAME OVER');
+}
+
+function generateStarshipMap(seed, map, mapOptions) {
+	// TODO:
+	const ship = generator.generate({ seed });
+	console.log(ship, arguments);
+	ship.parts.forEach((part) => {
+		if (part.isPassable()) {
+			map.setFloorAt(part.x, part.y);
+		} else {
+			map.setWallAt(part.x, part.y);
+		}
+	});
 }
 
 g.addHook('afterTeleportLevel', (data, game) => {
@@ -84,54 +113,54 @@ function getPoolHtml(key, a, b, c) {
 	return `<span class="pool ${key}-pool" title="${a}/${b}">${rote.Display.getPoolSquares(a, b, c)}</span>`
 }
 
-function runGame () {
+function drawInterface(game, hero) {
+	const level = game.getActiveLevel();
+	const intElt = document.getElementById('interface');
+	const deadHtml = hero.dead() ? `<div class="dead">DEAD</div>` : '';
+	const used = hero.getAbilityReadiedAmounts();
+	intElt.innerHTML = (`
+		<ul class="stats">
+		<li><span title="${level.description}">Floor: ${game.activeLevelIndex + 1} / ${game.levels.length}</span>
+			<span class="score">Score: ${hero.score}</span>
+		</li>
+		<li>Weapon Damage: ${hero.getWeaponDamage()}</li>
+		<li class="hp"><span title="hit points">HP:</span> ${getPoolHtml('hp', hero.hp, hero.hpMax, used.hp)}</li>
+		<li class="ap"><span title="attack points">AP:</span> ${getPoolHtml('ap', hero.ap, hero.apMax, used.ap)}</li>
+		<li class="bp"><span title="balance points">BP:</span> ${getPoolHtml('bp', hero.bp, hero.bpMax, used.bp)}</li>
+		<li class="ep"><span title="endurance points">EP:</span> ${getPoolHtml('ep', hero.ep, hero.epMax, used.ep)}</li>
+		</ul>
+		${deadHtml}
+		<ul class="abilities">
+		${getAbilityHtml(hero, 0)}
+		${getAbilityHtml(hero, 1)}
+		${getAbilityHtml(hero, 2)}
+		${getAbilityHtml(hero, 3)}
+		${getAbilityHtml(hero, 4)}
+		${getAbilityHtml(hero, 5)}
+		${getAbilityHtml(hero, 6)}
+		${getAbilityHtml(hero, 7)}
+		${getAbilityHtml(hero, 8)}
+		</ul>
+	`);
+};
+
+function drawDamage(isDamaged = false) {
+	const displayElt = document.getElementById('display');
+	if (isDamaged) {
+		displayElt.classList.add('damaged');
+	} else {
+		displayElt.classList.remove('damaged');
+	}		
+};
+
+function runGame() {
 	const seed = rote.random.makeSeed();
+	console.log('seed:', seed);
+
 	// Connect to browser DOM for display
-	g.createDisplay({
-		width: 60,
-		height: 30,
-		fontSize: 20,
-		fontFamily: "Fix15MonoBold" // alternatives: "AppleII" or "White Rabbit"
-	});
-	g.display.drawInterface = function(game, hero) {
-		const level = game.getActiveLevel();
-		const intElt = document.getElementById('interface');
-		const deadHtml = hero.dead() ? `<div class="dead">DEAD</div>` : '';
-		const used = hero.getAbilityReadiedAmounts();
-		intElt.innerHTML = (`
-			<ul class="stats">
-			<li><span title="${level.description}">Floor: ${game.activeLevelIndex + 1} / ${game.levels.length}</span>
-				<span class="score">Score: ${hero.score}</span>
-			</li>
-			<li>Weapon Damage: ${hero.getWeaponDamage()}</li>
-			<li class="hp"><span title="hit points">HP:</span> ${getPoolHtml('hp', hero.hp, hero.hpMax, used.hp)}</li>
-			<li class="ap"><span title="attack points">AP:</span> ${getPoolHtml('ap', hero.ap, hero.apMax, used.ap)}</li>
-			<li class="bp"><span title="balance points">BP:</span> ${getPoolHtml('bp', hero.bp, hero.bpMax, used.bp)}</li>
-			<li class="ep"><span title="endurance points">EP:</span> ${getPoolHtml('ep', hero.ep, hero.epMax, used.ep)}</li>
-			</ul>
-			${deadHtml}
-			<ul class="abilities">
-			${getAbilityHtml(hero, 0)}
-			${getAbilityHtml(hero, 1)}
-			${getAbilityHtml(hero, 2)}
-			${getAbilityHtml(hero, 3)}
-			${getAbilityHtml(hero, 4)}
-			${getAbilityHtml(hero, 5)}
-			${getAbilityHtml(hero, 6)}
-			${getAbilityHtml(hero, 7)}
-			${getAbilityHtml(hero, 8)}
-			</ul>
-			<div class="seed">Seed: ${seed}</div>
-		`);
-	};
-	g.display.drawDamage = function(isDamaged = false) {
-		const displayElt = document.getElementById('display');
-		if (isDamaged) {
-			displayElt.classList.add('damaged');
-		} else {
-			displayElt.classList.remove('damaged');
-		}		
-	};
+	g.createDisplay(displayOptions);
+	g.display.drawInterface = drawInterface;
+	g.display.drawDamage = drawDamage;
 	// Build the game world
 	g.createLevels(g.data.dungeon, seed);
 	const bottomLevel = g.levels[g.levels.length - 1];
@@ -149,13 +178,21 @@ function runGame () {
 	// Start the game
 	// TODO: move these to a state transition to GAME
 	setTimeout(() => {
-		g.print('A mysterious, pale dwarf tells you there is a powerful sunstone on this floor that is damaged and needs to be taken to the bottom floor for safety.', 'plot');
+		g.print(
+			`You find yourself on a dilapidated old voidship.
+			It would be perfect for your new home, but its rune-drive is missing a crucial
+			power source.`,
+			'plot'
+		);
 	}, 1000);
 	setTimeout(() => {
-		g.print('He offers to pay you a large sum of gold when your quest is complete. ...If you survive.', 'plot', 100);
+		g.print(
+			`Perhaps you could teleport to nearby ships in the system, and find a
+			Yendorian Crystal to power your ship.`,
+			'plot', 100
+		);
 	}, 2000);
-	// g.print('> Move with your favorite movement keys, and use things with Enter. <', 'tip', 200);
 	g.start();
 }
 
-g.ready(runGame, ['Fix15MonoBold']);
+g.ready(runGame);
