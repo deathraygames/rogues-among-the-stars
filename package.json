@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/deathraygames/rogues-among-the-stars#readme",
   "dependencies": {
-    "roguelike-fonts": "github:rocket-boots/roguelike-fonts"
+    "roguelike-fonts": "github:rocket-boots/roguelike-fonts",
+    "rote": "github:rocket-boots/rote",
+    "starship-the-next-generation": "github:rocket-boots/starship-the-next-generation"
   }
 }
