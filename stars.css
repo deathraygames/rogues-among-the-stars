@@ -94,6 +94,7 @@ h1 {
 	overflow-y: scroll;
 	scrollbar-width: none; /* Firefox */
 	-ms-overflow-style: none; /* IE */
+	line-height: 1.2em;
 }
 	#console::-webkit-scrollbar { /* WebKit */
 		width: 0;
@@ -149,6 +150,7 @@ h1 {
 .ap .pool, .ap-pool { color: #c74; }
 .bp .pool, .bp-pool { color: #47c; }
 .ep .pool, .ep-pool { color: #7c4; }
+.wp .pool, .wp-pool { color: #cc4; }
 .dead { color: #c47; }
 
 #controls {
@@ -159,6 +161,10 @@ h1 {
 	opacity: 0.5;
 	font-size: 80%;
 	overflow-y: auto;
+}
+
+#controls li {
+	margin-bottom: 0.3em;
 }
 
 .abilities {

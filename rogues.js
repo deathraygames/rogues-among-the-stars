@@ -34,17 +34,15 @@ const displayOptions = {
 
 function gameOver() {
 	g.print(`
-		The machine begins crushing the sunstone, causing an explosion! OH NO!
-		The ground begins to quake, worse and worse.
-		Considering the disaster this will caused aobve, you assume that the pale, old dwarf must have lied to you.
-		Your quest may be fulfilled, but what devasation will befall this land?`,
+		The runes along the walls begin to glow as a magical energy courses
+		through the ship. You can set off on new adventures in your new ship...`,
 		'plot'
 	);
 	g.print('GAME OVER');
 }
 
 function generateStarshipMap(seed, map, mapOptions) {
-	// TODO:
+	// TODO: ??
 	const ship = generator.generate({ seed });
 	console.log(ship, arguments);
 	ship.parts.forEach((part) => {
@@ -70,15 +68,18 @@ g.addHook('afterTeleportLevel', (data, game) => {
 function createPlayerCharacter(level) {
 	const { x, y } = level.findRandomFreeCell();
 	g.createHero({
-		x, y, name: 'Hero', sightRange: 6,
+		x, y, name: 'Rogue', sightRange: 6,
 		color: '#df2',
-		hp: 8, ap: 2, bp: 2, ep: 2,
-		faction: 'kith'
+		hp: 8, ap: 3, bp: 3, ep: 3, wp: 1,
+		faction: 'RATS'
 	});
-	g.hero.inventory.add( new rote.Item({ name: 'Beard comb', character: "⋹" }) );
+	// g.hero.inventory.add( new rote.Item({ name: 'Beard comb', character: "⋹" }) );
 	g.hero.inventory.add( new rote.Item({ name: 'Toga', character: "⌓" }) );
-	g.hero.gainRandomAbility(g.data.abilities);
-	g.hero.gainRandomAbility(g.data.abilities);
+	const numberOfLevels = 5; // TODO: calculate this?
+	const startingAbilities = 9 - (numberOfLevels - 1);
+	for(let i = 0; i < startingAbilities; i++) {
+		g.hero.gainRandomAbility(g.data.abilities);
+	}
 }
 
 function setupMachinery(level) {
@@ -120,7 +121,7 @@ function drawInterface(game, hero) {
 	const used = hero.getAbilityReadiedAmounts();
 	intElt.innerHTML = (`
 		<ul class="stats">
-		<li><span title="${level.description}">Floor: ${game.activeLevelIndex + 1} / ${game.levels.length}</span>
+		<li><span title="${level.description}">Ship: ${game.activeLevelIndex + 1} / ${game.levels.length}</span>
 			<span class="score">Score: ${hero.score}</span>
 		</li>
 		<li>Weapon Damage: ${hero.getWeaponDamage()}</li>
@@ -128,6 +129,7 @@ function drawInterface(game, hero) {
 		<li class="ap"><span title="attack points">AP:</span> ${getPoolHtml('ap', hero.ap, hero.apMax, used.ap)}</li>
 		<li class="bp"><span title="balance points">BP:</span> ${getPoolHtml('bp', hero.bp, hero.bpMax, used.bp)}</li>
 		<li class="ep"><span title="endurance points">EP:</span> ${getPoolHtml('ep', hero.ep, hero.epMax, used.ep)}</li>
+		<li class="wp"><span title="willpower (spell) points">WP:</span> ${getPoolHtml('wp', hero.wp, hero.wpMax, used.wp)}</li>
 		</ul>
 		${deadHtml}
 		<ul class="abilities">
@@ -171,25 +173,25 @@ function runGame() {
 	createPlayerCharacter(topLevel);
 
 	// "highlight" some parts of the town
-	const sunstone = topLevel.items.find((item) => { return item.type === 'sunstone'; });
-	topLevel.discoverCircle(sunstone.x, sunstone.y, 5);
+	const sunstone = topLevel.items.find((item) => { return item.type === 'axe'; });
+	topLevel.discoverCircle(sunstone.x, sunstone.y, 3);
 	const stairs = topLevel.props.find((prop) => { return prop.type === 'stairsDown'; });
 	topLevel.discoverCircle(stairs.x, stairs.y, 3);
 	// Start the game
 	// TODO: move these to a state transition to GAME
 	setTimeout(() => {
 		g.print(
-			`You find yourself on a dilapidated old voidship.
-			It would be perfect for your new home, but its rune-drive is missing a crucial
-			power source.`,
+			`After hitching rides across the void, you've finally found an abandoned ship that you
+			can make into a home. Unfortunately its rune-drive is unpowered, but the teleporter is
+			operational. Perhaps you can hitch a ride on some nearby ships and look for a Yendorian
+			crystal to fully power the ship.`,
 			'plot'
 		);
 	}, 1000);
 	setTimeout(() => {
 		g.print(
-			`Perhaps you could teleport to nearby ships in the system, and find a
-			Yendorian Crystal to power your ship.`,
-			'plot', 100
+			`To win: Find the crystal, return to your ship, and install it in your rune-drive.`,
+			'', 100
 		);
 	}, 2000);
 	g.start();

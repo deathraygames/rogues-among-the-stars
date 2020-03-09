@@ -1,5 +1,24 @@
 {
 	"abilities": {
+		"shield": {
+			"name": "Shield",
+			"description": "Protects from an incoming attack with a mystical barrier.",
+			"readyCost": { "wp": 1 },
+			"activateOn": "attacked",
+			"effects": [
+				"cancelAttack"
+			]			
+		},
+		"refresh": {
+			"name": "Refresh",
+			"description": "You are magically rejuvinated.",
+			"readyCost": { "wp": 1 },
+			"activateOn": "round",
+			"effects": [
+				"ap", "bp", "ep"
+			]
+		},
+
 		"lunge": {
 			"name": "Lunge",
 			"description": "Lunge at your opponent for extra damage.",

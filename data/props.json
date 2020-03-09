@@ -1,35 +1,34 @@
 {
 	"props": {
 		"stairsDown": {
-			"name": "Staircase Down",
+			"name": "Teleporter",
 			"character": ">",
-			"color": "#eee",
+			"color": "#ffe",
 			"stairLink": "stairsUp"
 		},
 		"stairsUp": {
-			"name": "Staircase Up",
+			"name": "Teleporter",
 			"character": "<",
-			"color": "#bbb"
+			"color": "#eed"
 		},
-
 		"alembic": {
 			"name": "alembic",
 			"character": "⚗",
-			"color": "#f99",
+			"color": "#edd",
 			"inventorySize": 1,
 			"use": {
 				"requires": [
 					{ "item": "gold" }
 				],
 				"message": "You brew some Gold-Stout, a wonderfully healing drink!",
-				"missingMessage": "You have no idea how alchemy works, but you assume it requires gold.",
+				"missingMessage": "You're no alchemist, but you assume dropping gold into this would be a good idea.",
 				"effects": [ "hp", "hp" ]
 			}
 		},
 		"chair": {
 			"name": "chair",
 			"character": "⑁",
-			"color": "#ccb",
+			"color": "#eed",
 			"use": {
 				"message": "You rest on the seat for a moment.",
 				"effects": [ "bp", "ep" ]
@@ -38,7 +37,7 @@
 		"chest": {
 			"name": "Chest",
 			"character": "⊟", "_c": "⍞⬒🛢",
-			"color": "#35e",
+			"color": "#dde",
 			"inventorySize": 3
 		},
 		"dirt": {
@@ -54,59 +53,69 @@
 					"character": "'"
 				}
 			},
-			"color": "#b93",
+			"color": "#ddd",
 			"use": {
 				"message": "The door seems to be broken."
 			}
 		},
-		"extractor": {
-			"name": "Sunstone Extractor",
+		"aetherFurnace": {
+			"name": "aether furnace",
+			"character": "⋑",
+			"color": "#dde",
+			"use": {
+				"message": "Fresh air pours out of the furnace.",
+				"effects": [ "ep", "ap" ]
+			}
+		},
+		"furnace": {
+			"name": "furnace",
+			"character": "ⵄ",
+			"color": "#edd",
+			"use": {
+				"message": "The furnace is hot to the touch."
+			}
+		},
+		"runedrive": {
+			"name": "Rune-drive",
 			"character": "⌼",
 			"surrounding": ["ⵖ", "⊣", "⋑", "⊣", "⏚", "⊢", "⋐", "⊢"],
-			"color": "#f99",
+			"color": "#779",
 			"inventorySize": 1,
 			"use": {
 				"requires": [
-					{ "item": "sunstone" }
+					{ "item": "yendor" }
 				],
-				"message": "You activate the extractor...",
-				"missingMessage": "A sunstone is required. (You must drop it on the same space)",
+				"message": "You activate the rune-drive...",
+				"missingMessage": "A Yendorian crystal is required. (You must drop it here)",
 				"effects": [
 					"message",
 					"score1000",
-					"gameOver",
-					"fire",
-					"damage"
+					"gameOver"
 				]
-			}
-		},
-		"executionSwitch": {
-			"name": "Execution switch",
-			"character": "⍎",
-			"color": "#fa8",
-			"use": {
-				"message": "As you press the switch, you feel a jolt of aggressive energy.",
-				"effects": [ "ap", "ap" ]
 			}
 		},
 		"gizmo": {
 			"name": "mysterious gizmo",
 			"character": "⧮",
-			"color": "#a88",
+			"color": "#ede",
 			"illumination": 1,
 			"use": {
-				"message": "You have never seen technology like this before."
+				"message": "You have never seen technology like this before.",
+				"effects": [ "wp" ]
 			}
 		},
 		"grass": {
 			"name": "grass",
 			"character": "\"",
-			"color": "#4c4"
+			"color": "#4c4",
+			"use": {
+				"message": "This grassy patch is used to grow mushrooms."
+			}
 		},
 		"lamp": {
 			"name": "lamp",
 			"character": "⍝",
-			"color": "#ffc",
+			"color": "#eed",
 			"illumination": 2,
 			"use": {
 				"message": "The lamp has a firey glow."
@@ -115,7 +124,7 @@
 		"machinery": {
 			"name": "Machinery",
 			"character": "ⴼ", "_c": "ⵄⵖ",
-			"color": "#fa8",
+			"color": "#ede",
 			"use": {
 				"message": "You attempt to fiddle with it but realize you might accidentally lose a finger in one of the gears.",
 				"effects": [ "bpDamage" ]
@@ -123,8 +132,8 @@
 		},
 		"pedestal": {
 			"name": "Pedestal",
-			"character": "¶", "_c": "Ī¶𐀚𐀙",
-			"color": "#f99"
+			"character": "Ī", "_c": "Ī¶𐀚𐀙",
+			"color": "#ddd"
 		},
 		"rubble": {
 			"name": "Rubble",
@@ -134,7 +143,7 @@
 		"shelves": {
 			"name": "shelves",
 			"character": "▤",
-			"color": "#971",
+			"color": "#ddd",
 			"use": {
 				"message": "You look through the shelves and find ancient books of knowledge. Too bad you can't read."
 			}
@@ -142,7 +151,7 @@
 		"table": {
 			"name": "Table",
 			"character": "⊓", "_c": "⊓ᚂ⊏⊐",
-			"color": "#ccb",
+			"color": "#ddd",
 			"states": {
 				"flipped": {
 					"character": "⊔"

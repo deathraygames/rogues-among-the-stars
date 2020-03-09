@@ -1,8 +1,7 @@
 {
 	"dungeon": [
-		"town",
-		{ "levelTypeKey": "dungeon", "repeat": 7 },
-		"docks",
-		"gizmo"
+		"homeship",
+		{ "levelTypeKey": "voidship", "repeat": 3 },
+		"bossship"
 	]
 }

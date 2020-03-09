@@ -1,40 +1,42 @@
 {
 	"items": {
 		"axe": {
-			"name": "Axe",
+			"name": "axe",
 			"character": "\\",
 			"color": "#ccc",
 			"weapon": 1
 		},
 		"sunstone": {
-			"name": "Sunstone",
+			"name": "sunstone",
 			"character": "✷", "_c": "⛭✸✷",
 			"color": "#fc0",
 			"illumination": 3
 		},
-		"ring": {
-			"name": "Ring of Chaos",
+		"helm": {
+			"name": "star-weaving helm",
 			"character": "=",
 			"color": "#96f"
 		},
 		"sword": {
-			"name": "Blade of Badness",
+			"name": "legionnaire blade",
 			"character": "|",
-			"color": "#677"
+			"color": "#677",
+			"weapon": 1
 		},
 		"wrench": {
 			"name": "Wrench of Stars",
 			"character": "\\",
 			"color": "#cdf",
-			"weapon": 1
+			"weapon": 2,
+			"illumination": 1
 		},
 		"yendor": {
-			"name": "Amulet of Yendor",
+			"name": "Yendorian Crystal",
 			"character": "⊛",
 			"color": "#9fb"
 		},
 		"pick": {
-			"name": "Mining Pickaxe",
+			"name": "etching pickaxe",
 			"character": "⩘",
 			"color": "#ccc",
 			"weapon": 1
